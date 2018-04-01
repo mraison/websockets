@@ -1,7 +1,8 @@
 import turtle
 from mouse_interfaces import mouseClient
+from client import websocketClient
 
-
+ws = websocketClient()
 mouse = mouseClient()
 
 
@@ -11,16 +12,34 @@ def onDrag(x, y):
 
     mouse.setRelPosition(x - mouse.x, y - mouse.y)
     mouse.setAbsolutePosition(x, y)
-    mouse.action = mouse.MOVEREL
-
+    mouse.action = mouse.MOVE
+    ws.run(mouse.serialize())
+    mouse.relX = 0
+    mouse.relY = 0
+    mouse.action = None
+    
     turtle.ondrag(onDrag, 1, True)
 
 
 def onLeftClick(x,y):
+    mouse.setRelPosition(x - mouse.x, y - mouse.y)
+    mouse.setAbsolutePosition(x, y)
+    mouse.action = mouse.LEFTCLICK
+    ws.run(mouse.serialize())
+    mouse.relX = 0
+    mouse.relY = 0
+    mouse.action = None
     print("L click");
 
 
 def onRightClick(x,y):
+    mouse.setRelPosition(x - mouse.x, y - mouse.y)
+    mouse.setAbsolutePosition(x, y)
+    mouse.action = mouse.RIGHTCLICK
+    ws.run(mouse.serialize())
+    mouse.relX = 0
+    mouse.relY = 0
+    mouse.action = None
     print("R click");
 
 
