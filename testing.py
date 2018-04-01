@@ -17,7 +17,7 @@ def onDrag(x, y):
     mouse.relX = 0
     mouse.relY = 0
     mouse.action = None
-    
+
     turtle.ondrag(onDrag, 1, True)
 
 
