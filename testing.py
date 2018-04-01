@@ -4,14 +4,14 @@ from mouse_interfaces import mouseClient
 
 mouse = mouseClient()
 
+
 def onDrag(x, y):
     turtle.ondrag(None)
     turtle.setposition(x,y)
 
     mouse.setRelPosition(x - mouse.x, y - mouse.y)
     mouse.setAbsolutePosition(x, y)
-    # I may need to multiply the y by -1 just to make sure that it converts well to the mouse control on the client.
-    mouse.y = y
+    mouse.action = mouse.MOVEREL
 
     turtle.ondrag(onDrag, 1, True)
 
@@ -33,6 +33,7 @@ def onRelease(x,y):
     mouse.y = 0
     mouse.relX = 0
     mouse.relY = 0
+    mouse.action = None
 
 
 turtle.speed(10) # increase speed so turtle keeps up with mouse.
@@ -44,3 +45,5 @@ turtle.ondrag(onDrag, 1, True)
 turtle.onrelease(onRelease, 1, True)
 
 turtle.done()
+print('after steps')
+print('blah')

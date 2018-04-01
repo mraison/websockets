@@ -1,5 +1,5 @@
 import pyautogui
-import tkinter
+import json
 
 class mouseClient(object):
 
@@ -23,6 +23,25 @@ class mouseClient(object):
         self.possibleActions[self.RIGHTCLICK] = self.rightClick
         self.possibleActions[self.LEFTCLICK] = self.leftClick
         self.possibleActions[self.MOVEREL] = self.moveRel
+
+    def serialize(self):
+        return json.dumps(
+            {
+                'x': self.x,
+                'y': self.y,
+                'relX': self.relX,
+                'relY': self.relY,
+                'action': self.action
+            }
+        )
+
+    def loadFromJson(self, jsonConfig):
+        m = json.loads(jsonConfig)
+        self.action = m['action']
+        self.x = m['x']
+        self.y = m['y']
+        self.relX = m['relX']
+        self.relY = m['relY']
 
 
     # functions for the server to use
@@ -51,6 +70,7 @@ class mouseClient(object):
     # functions for the client to use
     def setRelPosition(self, x, y):
         self.relX = x
+        # I may need to multiply the y by -1 just to make sure that it converts well to the mouse control on the client.
         self.relY = y
 
 
