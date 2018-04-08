@@ -1,6 +1,5 @@
 import pyautogui
 import json
-pyautogui.FAILSAFE = False
 
 class mouseClient(object):
 

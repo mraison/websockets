@@ -2,8 +2,6 @@
 
 import asyncio
 import websockets
-from mouse_interfaces import mouseClient
-
 
 class websocketClient(object):
 

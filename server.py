@@ -2,7 +2,9 @@
 
 import asyncio
 import websockets
+import pyautogui
 from mouse_interfaces import mouseClient
+pyautogui.FAILSAFE = False
 
 class websocketServer(object):
 
