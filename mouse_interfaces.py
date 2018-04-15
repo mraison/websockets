@@ -1,7 +1,9 @@
 import pyautogui
 import json
 
-class mouseClient(object):
+class mouseInt(object):
+
+    # things they both need
 
     # constants for binding.
     LEFTCLICK  = 'lclick'
@@ -26,6 +28,7 @@ class mouseClient(object):
         self.possibleActions[self.LEFTCLICK] = self.leftClick
         self.possibleActions[self.MOVE] = self.move
 
+    # things the client needs
     def serialize(self):
         return json.dumps(
             {
@@ -37,15 +40,31 @@ class mouseClient(object):
             }
         )
 
-    def loadFromJson(self, jsonConfig):
-        m = json.loads(jsonConfig)
-        self.action = m['action']
-        self.x = m['x']
-        self.y = m['y']
-        self.relX = m['relX']
-        self.relY = m['relY']
+    def setAction(self, action):
+        if action in [self.LEFTCLICK, self.RIGHTCLICK, self.MOVE]:
+            self.action = action
+
+    # State control
+    def setRelPosition(self, x, y):
+        self.relX = x
+        # I may need to multiply the y by -1 just to make sure that it converts well to the mouse control on the client.
+        self.relY = y
+
+    def setAbsolutePosition(self, x, y):
+        self.x = x
+        self.y = y
 
 
+    def reset(self):
+        self.x = 0
+        self.y = 0
+        self.relX = 0
+        self.relY = 0
+        self.action = None
+
+
+
+    # Things the server needs
     def moveRel(self, x, y):
         pyautogui.moveRel(x, y)
 
@@ -71,19 +90,12 @@ class mouseClient(object):
             self.possibleActions[self.action]()
 
 
-    def setAction(self, action):
-        if action in [self.LEFTCLICK, self.RIGHTCLICK, self.MOVE]:
-            self.action = action
+    def loadFromJson(self, jsonConfig):
+        m = json.loads(jsonConfig)
+        self.action = m['action']
+        self.x = m['x']
+        self.y = m['y']
+        self.relX = m['relX']
+        self.relY = m['relY']
 
-
-    # State control
-    def setRelPosition(self, x, y):
-        self.relX = x
-        # I may need to multiply the y by -1 just to make sure that it converts well to the mouse control on the client.
-        self.relY = y
-
-
-    def setAbsolutePosition(self, x, y):
-        self.x = x
-        self.y = y
 

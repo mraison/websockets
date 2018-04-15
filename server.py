@@ -3,7 +3,7 @@
 import asyncio
 import websockets
 import pyautogui
-from mouse_interfaces import mouseClient
+from mouse_interface_for_server import mouseServerInt
 pyautogui.FAILSAFE = False
 
 class websocketServer(object):
@@ -11,7 +11,7 @@ class websocketServer(object):
     def __init__(self):
         self.host = '0.0.0.0'
         self.port = 8765
-        self.mouseCli = mouseClient()
+        self.mouseCli = mouseServerInt()
 
 
     def run(self):
