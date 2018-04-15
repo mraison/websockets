@@ -1,0 +1,47 @@
+<MouseLayout>:
+    id: mouse
+    size_hint: 0.2, 0.2
+
+
+    GridLayout:
+        rows: 2
+        padding: 1
+
+
+        BoxLayout:
+            Button:
+                text: 'left'
+                canvas.before:
+                    Color:
+                        rgb: .6, .6, .6
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                on_press: mouse.leftClick
+            Button:
+                text: 'right'
+                canvas.before:
+                    Color:
+                        rgb: .6, .6, .6
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                on_press: mouse.rightClick
+
+        BoxLayout:
+            Label:
+                size_hint: 1.0, 1.0
+                text: 'Drag me'
+                canvas.before:
+                    Color:
+                        rgb: .6, .6, .6
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+
+FloatLayout:
+    MouseLayout:
+
+
+
