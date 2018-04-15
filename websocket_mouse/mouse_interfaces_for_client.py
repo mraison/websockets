@@ -1,5 +1,6 @@
 import json
-from mouse_interfaces import mouseInt
+from websocket_mouse.mouse_interfaces import mouseInt
+
 
 class mouseClientInt(mouseInt):
     # things the client needs

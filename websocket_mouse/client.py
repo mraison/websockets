@@ -6,7 +6,7 @@ import websockets
 class websocketClient(object):
 
     def __init__(self):
-        self.host = '192.168.1.13'
+        self.host = '192.168.1.11'
         self.port = '8765'
 
 
@@ -14,6 +14,7 @@ class websocketClient(object):
         async def send(uri, message):
             async with websockets.connect(uri) as websocket:
                 await websocket.send(message)
+                print('sending...')
 
                 recieve_txt = await websocket.recv()
                 print(recieve_txt)
@@ -26,7 +27,3 @@ class websocketClient(object):
         asyncio.get_event_loop().run_until_complete(
             send('ws://' + self.host + ':' + self.port, message)
         )
-
-
-# cli = websocketClient()
-# cli.run()

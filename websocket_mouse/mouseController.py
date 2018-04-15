@@ -1,13 +1,12 @@
-import turtle
-from mouse_interfaces import mouseInt
-from client import websocketClient
+from websocket_mouse.mouse_interfaces_for_client import mouseClientInt
+from websocket_mouse.client import websocketClient
 
 
 class mouseController(object):
 
     def __init__(self):
         self.ws = websocketClient()
-        self.mouse = mouseInt()
+        self.mouse = mouseClientInt()
 
 
     def onDrag(self, x, y):
@@ -16,8 +15,7 @@ class mouseController(object):
         self.mouse.setAction(self.mouse.MOVE)
         self.ws.run(self.mouse.serialize())
 
-        self.mouse.setRelPosition(0, 0)
-        self.mouse.action = None
+        self.mouse.reset()
 
 
     def onLeftClick(self, x,y):
@@ -26,8 +24,7 @@ class mouseController(object):
         self.mouse.setAction(self.mouse.LEFTCLICK)
         self.ws.run(self.mouse.serialize())
 
-        self.mouse.setRelPosition(0, 0)
-        self.mouse.action = None
+        self.mouse.reset()
         print("L click");
 
 
@@ -37,8 +34,7 @@ class mouseController(object):
         self.mouse.setAction(self.mouse.RIGHTCLICK)
         self.ws.run(self.mouse.serialize())
 
-        self.mouse.setRelPosition(0, 0)
-        self.mouse.action = None
+        self.mouse.reset()
         print("R click");
 
 

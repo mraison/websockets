@@ -17,7 +17,7 @@
                     Rectangle:
                         pos: self.pos
                         size: self.size
-                on_press: mouse.leftClick
+                on_press: mouse.leftClick(self.pos.x, self.pos.y)
             Button:
                 text: 'right'
                 canvas.before:
@@ -26,7 +26,7 @@
                     Rectangle:
                         pos: self.pos
                         size: self.size
-                on_press: mouse.rightClick
+                on_press: mouse.rightClick(self.pos.x, self.pos.y)
 
         BoxLayout:
             Label:

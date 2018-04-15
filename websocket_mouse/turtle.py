@@ -1,6 +1,6 @@
 import turtle
-from mouseController import mouseController
 from client import websocketClient
+from mouseController import mouseController
 
 ws = websocketClient()
 mouse = mouseController()
@@ -8,7 +8,7 @@ mouse = mouseController()
 
 def onDrag(x, y):
     turtle.ondrag(None)
-    turtle.setposition(x,y)
+    turtle.setposition(x, y)
     mouse.onDrag(x,y)
 
     turtle.ondrag(onDrag, 1, True)
